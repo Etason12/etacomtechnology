@@ -1,0 +1,17 @@
+{
+  "name": "Etacom Technology - Software & ERP Development",
+  "short_name": "Etacom Tech",
+  "description": "Premier software development and IT consulting company in Addis Ababa, Ethiopia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

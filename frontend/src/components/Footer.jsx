@@ -13,10 +13,10 @@ export default function Footer() {
               software, ERP systems, website development, and mobile applications.
             </p>
             <div className="footer-social">
-              <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f" /></a>
-              <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in" /></a>
-              <a href="#" aria-label="YouTube"><i className="fab fa-youtube" /></a>
-              <a href="#" aria-label="Twitter"><i className="fab fa-twitter" /></a>
+              <a href="https://facebook.com/etacomtechnology" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+              <a href="https://linkedin.com/company/etacomtechnology" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in" /></a>
+              <a href="https://youtube.com/@etacomtechnology" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
+              <a href="https://twitter.com/etacomtechnology" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
             </div>
           </div>
           <div>

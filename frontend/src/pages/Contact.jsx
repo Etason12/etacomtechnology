@@ -1,32 +1,35 @@
 import { useState } from 'react';
 import axios from 'axios';
-import SEO from '../components/SEO'
+import SEO from '../components/SEO';
+import PageHeader from '../components/PageHeader';
+import { createBreadcrumbJsonLd } from '../data/shared';
 
-const breadcrumbJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://etacomtechnology.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://etacomtechnology.com/contact' },
-  ],
-}
+const breadcrumbJsonLd = createBreadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact' },
+]);
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSubmitting(true);
     try {
-      await axios.post('/api/contact', form);
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      await axios.post(`${API_URL}/api/contact`, form);
       setSubmitted(true);
       setForm({ name: '', email: '', phone: '', subject: '', message: '' });
     } catch {
       setError('Failed to send message. Please try again later.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -39,12 +42,7 @@ export default function Contact() {
         canonical="/contact"
         jsonLd={breadcrumbJsonLd}
       />
-      <section className="page-header">
-        <div className="container">
-          <h1>Contact Us</h1>
-          <p>Get in touch with us for your software and technology needs</p>
-        </div>
-      </section>
+      <PageHeader title="Contact Us" subtitle="Get in touch with us for your software and technology needs" />
 
       <section className="section">
         <div className="container">
@@ -101,28 +99,28 @@ export default function Contact() {
               ) : (
                 <form onSubmit={handleSubmit}>
                   <div className="form-group">
-                    <label>Full Name *</label>
-                    <input type="text" name="name" value={form.name} onChange={handleChange} required placeholder="Your full name" />
+                    <label htmlFor="contact-name">Full Name *</label>
+                    <input id="contact-name" type="text" name="name" value={form.name} onChange={handleChange} required placeholder="Your full name" maxLength={100} />
                   </div>
                   <div className="form-group">
-                    <label>Email Address *</label>
-                    <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="your@email.com" />
+                    <label htmlFor="contact-email">Email Address *</label>
+                    <input id="contact-email" type="email" name="email" value={form.email} onChange={handleChange} required placeholder="your@email.com" maxLength={254} />
                   </div>
                   <div className="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+251-XXX-XXXXXX" />
+                    <label htmlFor="contact-phone">Phone Number</label>
+                    <input id="contact-phone" type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+251-XXX-XXXXXX" maxLength={30} />
                   </div>
                   <div className="form-group">
-                    <label>Subject</label>
-                    <input type="text" name="subject" value={form.subject} onChange={handleChange} placeholder="What is this regarding?" />
+                    <label htmlFor="contact-subject">Subject</label>
+                    <input id="contact-subject" type="text" name="subject" value={form.subject} onChange={handleChange} placeholder="What is this regarding?" maxLength={200} />
                   </div>
                   <div className="form-group">
-                    <label>Message *</label>
-                    <textarea name="message" value={form.message} onChange={handleChange} required placeholder="Tell us about your project..." />
+                    <label htmlFor="contact-message">Message *</label>
+                    <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} required placeholder="Tell us about your project..." maxLength={5000} />
                   </div>
                   {error && <p style={{ color: 'red', marginBottom: 16 }}>{error}</p>}
-                  <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                    Send Message <i className="fas fa-paper-plane" />
+                  <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} disabled={submitting}>
+                    {submitting ? 'Sending...' : <>Send Message <i className="fas fa-paper-plane" /></>}
                   </button>
                 </form>
               )}

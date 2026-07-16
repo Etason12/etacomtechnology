@@ -1,15 +1,13 @@
-import SEO from '../components/SEO'
+import SEO from '../components/SEO';
+import PageHeader from '../components/PageHeader';
+import { createBreadcrumbJsonLd } from '../data/shared';
+
+const breadcrumbJsonLd = createBreadcrumbJsonLd([
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+]);
 
 export default function About() {
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://etacomtechnology.com/' },
-      { '@type': 'ListItem', position: 2, name: 'About', item: 'https://etacomtechnology.com/about' },
-    ],
-  }
-
   return (
     <>
       <SEO
@@ -19,12 +17,7 @@ export default function About() {
         canonical="/about"
         jsonLd={breadcrumbJsonLd}
       />
-      <section className="page-header">
-        <div className="container">
-          <h1>About Etacom Technology</h1>
-          <p>Empowering businesses with innovative technology solutions since 2023</p>
-        </div>
-      </section>
+      <PageHeader title="About Etacom Technology" subtitle="Empowering businesses with innovative technology solutions since 2023" />
 
       <section className="section">
         <div className="container">

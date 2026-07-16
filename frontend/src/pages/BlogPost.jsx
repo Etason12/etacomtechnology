@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import SEO from '../components/SEO'
+import DOMPurify from 'dompurify';
+import SEO from '../components/SEO';
+import PageHeader from '../components/PageHeader';
+import { createBreadcrumbJsonLd } from '../data/shared';
+
+const SITE_URL = 'https://etacomtechnology.com';
 
 const fallbackPosts = {
   'future-of-erp-2026': {
@@ -67,7 +72,8 @@ export default function BlogPost() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`/api/blog/${slug}`)
+    const API_URL = import.meta.env.VITE_API_URL || '';
+    axios.get(`${API_URL}/api/blog/${slug}`)
       .then((res) => setPost(res.data.data))
       .catch(() => {
         const fallback = fallbackPosts[slug];
@@ -86,27 +92,24 @@ export default function BlogPost() {
 
   if (!post) {
     return (
-      <section className="section" style={{ paddingTop: 120 }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h2>Article Not Found</h2>
-          <p style={{ margin: '16px 0', color: 'var(--gray-500)' }}>The article you're looking for doesn't exist.</p>
-          <Link to="/blog" className="btn btn-primary">Back to Blog</Link>
-        </div>
-      </section>
+      <>
+        <PageHeader title="Article Not Found" subtitle="The article you're looking for doesn't exist." />
+        <section className="section">
+          <div className="container" style={{ textAlign: 'center' }}>
+            <Link to="/blog" className="btn btn-primary">Back to Blog</Link>
+          </div>
+        </section>
+      </>
     );
   }
 
-  const breadcrumbJsonLd = post ? {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://etacomtechnology.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://etacomtechnology.com/blog' },
-      { '@type': 'ListItem', position: 3, name: post.title, item: `https://etacomtechnology.com/blog/${slug}` },
-    ],
-  } : null
+  const breadcrumbJsonLd = createBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: post.title, path: `/blog/${slug}` },
+  ]);
 
-  const articleJsonLd = post ? {
+  const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
@@ -114,38 +117,43 @@ export default function BlogPost() {
     author: { '@type': 'Organization', name: post.author || 'Etacom Technology' },
     publisher: { '@type': 'Organization', name: 'Etacom Technology' },
     datePublished: post.date,
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://etacomtechnology.com/blog/${slug}` },
-  } : null
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${slug}` },
+  };
+
+  const sanitizedContent = DOMPurify.sanitize(post.content);
 
   return (
     <>
       <SEO
-        title={post?.title || 'Article'}
-        description={post?.content ? post.content.replace(/<[^>]*>/g, '').substring(0, 160) : 'Read our latest article on technology and software development.'}
-        keywords={`${post?.category || 'technology'}, software development, ERP, ${post?.title || ''}`}
+        title={post.title || 'Article'}
+        description={post.content ? post.content.replace(/<[^>]*>/g, '').substring(0, 160) : 'Read our latest article on technology and software development.'}
+        keywords={`${post.category || 'technology'}, software development, ERP, ${post.title || ''}`}
         canonical={`/blog/${slug}`}
         ogType="article"
-        publishedTime={post?.date}
-        author={post?.author}
-        jsonLd={breadcrumbJsonLd || articleJsonLd ? [breadcrumbJsonLd, articleJsonLd].filter(Boolean) : undefined}
+        publishedTime={post.date}
+        author={post.author}
+        jsonLd={[breadcrumbJsonLd, articleJsonLd]}
       />
-      <section className="page-header">
-        <div className="container">
-          <Link to="/blog" style={{ color: 'var(--primary)', marginBottom: 12, display: 'inline-block' }}>
-            <i className="fas fa-arrow-left" /> Back to Blog
-          </Link>
-          <h1>{post.title}</h1>
-          <p style={{ fontSize: '0.9rem', color: 'var(--gray-400)' }}>
-            {post.category && <span style={{ background: 'var(--primary)', color: 'white', padding: '2px 10px', borderRadius: 12, marginRight: 12, fontSize: '0.8rem' }}>{post.category}</span>}
-            {new Date(post.date).toLocaleDateString()} &middot; {post.author}
-          </p>
-        </div>
-      </section>
-
+      <PageHeader
+        title={post.title}
+        subtitle={
+          <>
+            {post.category && (
+              <span style={{ background: 'var(--primary)', color: 'white', padding: '2px 10px', borderRadius: 12, marginRight: 12, fontSize: '0.8rem' }}>
+                {post.category}
+              </span>
+            )}
+            <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time> &middot; {post.author}
+          </>
+        }
+      />
       <section className="section">
         <div className="container">
           <div className="blog-post-content">
-            <div className="body" dangerouslySetInnerHTML={{ __html: post.content }} />
+            <Link to="/blog" style={{ color: 'var(--primary)', marginBottom: 12, display: 'inline-block' }}>
+              <i className="fas fa-arrow-left" /> Back to Blog
+            </Link>
+            <div className="body" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
           </div>
         </div>
       </section>

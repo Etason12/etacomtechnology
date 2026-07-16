@@ -1,26 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SEO from '../components/SEO'
-
-const services = [
-  { icon: 'fa-solid fa-laptop-code', title: 'Software Development', desc: 'Design & Develop Custom Software Solutions that empower businesses to stay ahead of their competition.' },
-  { icon: 'fa-solid fa-globe', title: 'Website Design & Development', desc: 'Designing and creating custom built websites, web portals and web applications tailored to your needs.' },
-  { icon: 'fa-solid fa-cubes', title: 'ERP System Development', desc: 'Enhance Business Operations with Comprehensive ERP Software streamlining data flow across departments.' },
-  { icon: 'fa-solid fa-sms', title: 'SMS Messaging', desc: 'Bulk SMS service provider allowing you to send messages in group using bulk SMS gateway.' },
-  { icon: 'fa-solid fa-mobile-screen', title: 'Mobile App Development', desc: 'Develops and customizes mobile application development solutions for specific business needs.' },
-  { icon: 'fa-solid fa-server', title: 'Server Hosting & Configuration', desc: 'High quality affordable hosting services for companies of all sizes on reliable servers.' },
-];
-
-const erpModules = [
-  { icon: 'fa-solid fa-chart-line', title: 'Accounting & Finance', desc: 'Keep tabs on your company\'s total cash flow and profit and loss.' },
-  { icon: 'fa-solid fa-users', title: 'HR, Payroll & Attendance', desc: 'Automate payroll, recruitment, leave, attendance and employee operations.' },
-  { icon: 'fa-solid fa-warehouse', title: 'Inventory Management', desc: 'Track stock levels and pricing for all products your organization handles.' },
-  { icon: 'fa-solid fa-tasks', title: 'Project Management', desc: 'Manage raw material, accounting for requirements, and track project status.' },
-  { icon: 'fa-solid fa-cart-shopping', title: 'Purchase Management', desc: 'Record track of purchase quantities, items purchased, and payment expenses.' },
-  { icon: 'fa-solid fa-bullhorn', title: 'Sales & Marketing', desc: 'Manage products, customers, quotations and invoices with CRM integration.' },
-  { icon: 'fa-solid fa-truck', title: 'Fleet Management', desc: 'Manage vehicle registration, repair, maintenance, driver and fuel consumption.' },
-  { icon: 'fa-solid fa-handshake', title: 'Customer CRM', desc: 'Contact management, lead tracking, quote creation, and sales productivity.' },
-];
+import SEO from '../components/SEO';
+import { homeServices, erpModules } from '../data/shared';
 
 const industries = [
   { id: 'healthcare', title: 'Healthcare', content: 'We offer Healthcare Software Development solutions based on in-depth research & deep industry knowledge. Our solutions use cutting-edge technology to deliver future-ready systems that address healthcare needs and eliminate redundancy.' },
@@ -39,7 +20,7 @@ const whyUs = [
   { icon: 'fa-solid fa-clock', title: 'On Time & On Budget', desc: 'We determine scope, create a budget and timeline, and stick to them. Weekly status checks keep everyone on track.' },
 ];
 
-const process = [
+const processSteps = [
   { step: 1, title: 'Planning & Strategy', desc: 'All integrals are discussed, timelines decided, roles allotted, milestones and modules are decided as per the SRS documentation.' },
   { step: 2, title: 'Development & Customization', desc: 'Programming, testing, debugging, and UI development. The first working model is shown to the client for feedback.' },
   { step: 3, title: 'Quality Assurance', desc: 'Software quality is checked to satisfy major requirements. The project must be robust, reliable, scalable, and available.' },
@@ -127,7 +108,6 @@ export default function Home() {
         canonical="/"
         jsonLd={[organizationJsonLd, websiteJsonLd]}
       />
-      {/* Hero */}
       <section className="hero">
         <div className="container">
           <div className="hero-content">
@@ -165,7 +145,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services */}
       <section className="section" id="services">
         <div className="container">
           <div className="section-header">
@@ -173,8 +152,8 @@ export default function Home() {
             <p>We deliver end-to-end technology solutions that help businesses grow and succeed in the digital era.</p>
           </div>
           <div className="services-grid">
-            {services.map((s, i) => (
-              <div className="card service-card" key={i}>
+            {homeServices.map((s) => (
+              <div className="card service-card" key={s.title}>
                 <div className="icon"><i className={s.icon} /></div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
@@ -184,7 +163,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ERP Modules */}
       <section className="section erp-section" id="erp">
         <div className="container">
           <div className="section-header">
@@ -192,8 +170,8 @@ export default function Home() {
             <p>Comprehensive ERP software developed exclusively for Ethiopian companies. Each module manages different divisions and departments.</p>
           </div>
           <div className="erp-grid">
-            {erpModules.map((m, i) => (
-              <div className="card erp-card" key={i}>
+            {erpModules.map((m) => (
+              <div className="card erp-card" key={m.title}>
                 <div className="icon"><i className={m.icon} /></div>
                 <h4>{m.title}</h4>
                 <p>{m.desc}</p>
@@ -203,7 +181,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Industries */}
       <section className="section industries-section">
         <div className="container">
           <div className="section-header">
@@ -214,7 +191,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Us */}
       <section className="section why-section">
         <div className="container">
           <div className="section-header">
@@ -222,8 +198,8 @@ export default function Home() {
             <p>We are committed to delivering excellence through competitive pricing, exceptional experiences, and reliable delivery.</p>
           </div>
           <div className="why-grid">
-            {whyUs.map((w, i) => (
-              <div className="card why-card" key={i}>
+            {whyUs.map((w) => (
+              <div className="card why-card" key={w.title}>
                 <div className="icon"><i className={w.icon} /></div>
                 <h3>{w.title}</h3>
                 <p>{w.desc}</p>
@@ -233,7 +209,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Process */}
       <section className="section process-section">
         <div className="container">
           <div className="section-header">
@@ -241,8 +216,8 @@ export default function Home() {
             <p>We follow a proven methodology to deliver high-quality software solutions on time and within budget.</p>
           </div>
           <div className="process-steps">
-            {process.map((p, i) => (
-              <div className="process-step" key={i}>
+            {processSteps.map((p) => (
+              <div className="process-step" key={p.step}>
                 <div className="step-number">{p.step}</div>
                 <h4>{p.title}</h4>
                 <p>{p.desc}</p>
@@ -252,7 +227,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="cta-banner">
         <div className="container">
           <h2>Ready to Transform Your Business?</h2>
@@ -261,7 +235,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Blog */}
       <section className="section" id="blog">
         <div className="container">
           <div className="section-header">
@@ -269,8 +242,8 @@ export default function Home() {
             <p>Insights on software development, ERP implementation, and technology trends.</p>
           </div>
           <div className="blog-grid">
-            {blogPosts.map((post, i) => (
-              <div className="card blog-card" key={i}>
+            {blogPosts.map((post) => (
+              <div className="card blog-card" key={post.slug}>
                 <div className="blog-card-image">
                   <i className="fas fa-newspaper" />
                 </div>
@@ -288,7 +261,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="section faq-section">
         <div className="container">
           <div className="section-header">
@@ -308,18 +280,27 @@ function IndustryTabs({ industries }) {
   const [active, setActive] = useState(industries[0]);
   return (
     <>
-      <div className="industry-tabs">
+      <div className="industry-tabs" role="tablist" aria-label="Industries">
         {industries.map((ind) => (
           <button
             key={ind.id}
             className={`industry-tab${active.id === ind.id ? ' active' : ''}`}
             onClick={() => setActive(ind)}
+            role="tab"
+            aria-selected={active.id === ind.id}
+            aria-controls={`panel-${ind.id}`}
+            id={`tab-${ind.id}`}
           >
             {ind.title}
           </button>
         ))}
       </div>
-      <div className="industry-content">
+      <div
+        className="industry-content"
+        role="tabpanel"
+        id={`panel-${active.id}`}
+        aria-labelledby={`tab-${active.id}`}
+      >
         <h3>{active.title}</h3>
         <p>{active.content}</p>
       </div>
@@ -329,13 +310,19 @@ function IndustryTabs({ industries }) {
 
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false);
+  const answerId = `faq-answer-${q.slice(0, 20).replace(/\s/g, '-')}`;
   return (
     <div className="faq-item">
-      <div className={`faq-question${open ? ' open' : ''}`} onClick={() => setOpen(!open)}>
+      <button
+        className={`faq-question${open ? ' open' : ''}`}
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-controls={answerId}
+      >
         {q}
         <span className="arrow"><i className="fas fa-chevron-down" /></span>
-      </div>
-      {open && <div className="faq-answer">{a}</div>}
+      </button>
+      {open && <div className="faq-answer" id={answerId} role="region">{a}</div>}
     </div>
   );
 }

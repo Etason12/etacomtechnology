@@ -55,25 +55,43 @@ function ScrollRevealOnRoute() {
         .forEach((el) => el.classList.add('visible'));
       return;
     }
-    // wait a tick so lazy-loaded content is rendered
-    const id = window.requestAnimationFrame(() => {
-      const targets = document.querySelectorAll(
-        '.animate-on-scroll, .animate-stagger'
-      );
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-      );
-      targets.forEach((el) => observer.observe(el));
+
+    // Immediately reveal elements already in the viewport
+    const revealInView = () => {
+      const targets = document.querySelectorAll('.animate-on-scroll, .animate-stagger');
+      targets.forEach((el) => {
+        if (!el.classList.contains('visible')) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add('visible');
+          }
+        }
+      });
+      return targets;
+    };
+
+    const targets = revealInView();
+
+    // Set up IntersectionObserver for below-fold elements
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    targets.forEach((el) => {
+      if (!el.classList.contains('visible')) {
+        observer.observe(el);
+      }
     });
-    return () => window.cancelAnimationFrame(id);
+
+    return () => observer.disconnect();
   }, [pathname]);
   return null;
 }

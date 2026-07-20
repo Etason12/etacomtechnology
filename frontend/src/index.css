@@ -2989,12 +2989,6 @@ input, select, textarea {
 }
 
 /* === Scroll Animations === */
-html.no-js .animate-on-scroll,
-html.no-js .animate-stagger > * {
-  opacity: 1;
-  transform: none;
-}
-
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
@@ -3096,16 +3090,11 @@ html.no-js .animate-stagger > * {
 @media (prefers-reduced-motion: reduce) {
   .animate-on-scroll,
   .animate-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
     transition: none;
   }
 
-  html:not(.no-js) .animate-on-scroll,
-  html:not(.no-js) .animate-stagger > * {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-  
   .hover-lift:hover {
     transform: none;
   }

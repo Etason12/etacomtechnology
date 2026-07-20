@@ -40,10 +40,10 @@ export default function Footer() {
           <div className="footer-links">
             <h4>Services</h4>
             <ul>
-              <li><Link to="/service?slug=custom-software-development">Software Development</Link></li>
-              <li><Link to="/service?slug=ai-machine-learning">AI & Machine Learning</Link></li>
-              <li><Link to="/service?slug=data-center-solutions">Data Center Solutions</Link></li>
-              <li><Link to="/service?slug=ict-equipment-supply-installation">ICT Equipment Supply</Link></li>
+              <li><Link to="/services/custom-software-development">Software Development</Link></li>
+              <li><Link to="/services/ai-machine-learning">AI & Machine Learning</Link></li>
+              <li><Link to="/services/data-center-solutions">Data Center Solutions</Link></li>
+              <li><Link to="/services/ict-equipment-supply-installation">ICT Equipment Supply</Link></li>
             </ul>
           </div>
           <div className="footer-links">

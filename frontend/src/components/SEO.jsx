@@ -2,8 +2,8 @@ import { Helmet } from 'react-helmet-async'
 
 const SITE_NAME = 'Etacom Technology'
 const SITE_URL = 'https://etacomtechnology.com'
-const DEFAULT_DESC = 'Etacom Technology is a premier software development and IT consulting company based in Addis Ababa, Ethiopia. We specialize in custom software, ERP systems, website development, and mobile apps.'
-const DEFAULT_KEYWORDS = 'software development Ethiopia, ERP Ethiopia, web development Addis Ababa, IT consulting Ethiopia, custom software, mobile app development Ethiopia, Etacom Technology'
+const DEFAULT_DESC = 'Etacom Technology is a premier ICT and software development company based in Mekelle and Addis Ababa, Ethiopia. We deliver custom software, ERP, AI, data center, and ICT solutions across Ethiopia.'
+const DEFAULT_KEYWORDS = 'ICT solutions Mekelle, software development Tigray, ERP Ethiopia, IT consulting Addis Ababa, data center Ethiopia, ICT equipment supply, custom software Ethiopia, Etacom Technology'
 const OG_IMAGE = '/og-image.png'
 
 export default function SEO({
@@ -38,6 +38,7 @@ export default function SEO({
       <meta property="og:locale" content="en_US" />
 
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@etacomtechnology" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={`${SITE_URL}${ogImage}`} />

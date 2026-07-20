@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
 import PageHeader from '../components/PageHeader';
 
@@ -243,8 +243,7 @@ const serviceMap = {
 };
 
 export default function Service() {
-  const [searchParams] = useSearchParams();
-  const slug = searchParams.get('slug');
+  const { slug } = useParams();
 
   const service = slug ? serviceMap[slug] : null;
 
@@ -289,8 +288,9 @@ export default function Service() {
     <>
       <SEO
         title={service.title}
-        description={service.tagline}
-        canonical={`/services?slug=${service.slug}`}
+        description={`${service.tagline} — Etacom Technology delivers ${service.title.toLowerCase()} services in Mekelle, Tigray, and across Ethiopia.`}
+        keywords={`${service.title.toLowerCase()}, ${service.shortTitle.toLowerCase()}, ICT solutions Mekelle, software services Tigray, IT consulting Ethiopia, Etacom Technology`}
+        canonical={`/services/${service.slug}`}
         jsonLd={serviceJsonLd}
       />
       <PageHeader title={service.title} subtitle={service.tagline} />

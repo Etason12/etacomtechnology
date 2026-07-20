@@ -80,7 +80,7 @@ export default function Blog() {
                   <span className="blog-category">{post.category}</span>
                   <span className="blog-date">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
-                <h3>{post.title}</h3>
+                <h2 className="blog-card-title">{post.title}</h2>
                 <p>{post.excerpt}</p>
                 <div className="blog-read-more">
                   <span>Read article &rarr;</span>

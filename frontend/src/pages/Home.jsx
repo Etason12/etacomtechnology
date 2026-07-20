@@ -4,24 +4,43 @@ import AnimatedCounter from "../components/AnimatedCounter";
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
   name: "Etacom Technology",
   url: "https://etacomtechnology.com",
   logo: "https://etacomtechnology.com/favicon.svg",
-  description: "Premier software development and IT consulting company based in Addis Ababa, Ethiopia.",
+  image: "https://etacomtechnology.com/og-image.png",
+  description: "Premier ICT and software development company serving Mekelle, Tigray, and all of Ethiopia with custom software, ERP, AI, data center, and ICT solutions.",
   foundingDate: "2023",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Bole, In-front of Bonanza Hotel",
-    addressLocality: "Addis Ababa",
-    addressCountry: "ET",
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+251-911-000-000",
-    contactType: "customer service",
-    email: "info@etacomtechnology.com",
-  },
+  address: [
+    {
+      "@type": "PostalAddress",
+      streetAddress: "Mekelle",
+      addressLocality: "Mekelle",
+      addressRegion: "Tigray",
+      addressCountry: "ET",
+    },
+    {
+      "@type": "PostalAddress",
+      streetAddress: "Bole, In-front of Bonanza Hotel",
+      addressLocality: "Addis Ababa",
+      addressCountry: "ET",
+    },
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+251-914-08058",
+      contactType: "customer service",
+      areaServed: "Mekelle, Tigray",
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: "+251-911-554969",
+      contactType: "customer service",
+      areaServed: "Addis Ababa",
+    },
+  ],
+  areaServed: ["Mekelle", "Tigray", "Addis Ababa", "Ethiopia"],
   sameAs: [
     "https://facebook.com/etacomtechnology",
     "https://linkedin.com/company/etacomtechnology",
@@ -46,8 +65,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        description="Etacom Technology - premier software development and IT consulting company in Addis Ababa, Ethiopia. Custom software, ERP systems, website design, and mobile app development."
-        keywords="Etacom Technology, software development Ethiopia, ERP Ethiopia, web development Addis Ababa, IT consulting, custom software, mobile apps Ethiopia"
+        description="Etacom Technology - premier ICT and software development company serving Mekelle, Tigray, and all of Ethiopia. Custom software, ERP systems, AI, data center, and ICT solutions."
+        keywords="ICT solutions Mekelle, software development Tigray, ERP Ethiopia, IT consulting Mekelle, data center Ethiopia, ICT equipment supply, Etacom Technology, custom software Ethiopia"
         canonical="/"
         jsonLd={[organizationJsonLd, websiteJsonLd]}
       />
@@ -210,7 +229,7 @@ export default function Home() {
                 <li>Enterprise Software</li>
                 <li>API Development</li>
               </ul>
-              <Link to="/services?slug=custom-software-development" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/custom-software-development" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-purple">
@@ -223,7 +242,7 @@ export default function Home() {
                 <li>NLP & Chatbots</li>
                 <li>Computer Vision</li>
               </ul>
-              <Link to="/services?slug=ai-machine-learning" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/ai-machine-learning" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-green">
@@ -236,7 +255,7 @@ export default function Home() {
                 <li>Data Warehousing</li>
                 <li>Analytics Dashboards</li>
               </ul>
-              <Link to="/services?slug=data-engineering-analytics" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/data-engineering-analytics" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-cyan">
@@ -249,7 +268,7 @@ export default function Home() {
                 <li>CI/CD Pipelines</li>
                 <li>Infrastructure as Code</li>
               </ul>
-              <Link to="/services?slug=cloud-solutions-devops" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/cloud-solutions-devops" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-indigo">
@@ -262,7 +281,7 @@ export default function Home() {
                 <li>Progressive Web Apps</li>
                 <li>UI/UX Design</li>
               </ul>
-              <Link to="/services?slug=mobile-web-applications" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/mobile-web-applications" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-teal">
@@ -275,7 +294,7 @@ export default function Home() {
                 <li>Real-time Reporting</li>
                 <li>Data Storytelling</li>
               </ul>
-              <Link to="/services?slug=data-visualization-bi" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/data-visualization-bi" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-slate">
@@ -288,7 +307,7 @@ export default function Home() {
                 <li>Cooling & Power</li>
                 <li>Data Center Design</li>
               </ul>
-              <Link to="/services?slug=data-center-solutions" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/data-center-solutions" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-orange">
@@ -301,7 +320,7 @@ export default function Home() {
                 <li>Legacy Modernization</li>
                 <li>Tech Advisory</li>
               </ul>
-              <Link to="/services?slug=digital-transformation" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/digital-transformation" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
             <article className="service-card">
               <div className="service-icon icon-pink">
@@ -314,7 +333,7 @@ export default function Home() {
                 <li>CCTV & Access Control</li>
                 <li>Structured Cabling</li>
               </ul>
-              <Link to="/services?slug=ict-equipment-supply-installation" className="service-card-link">Learn More <span>&rarr;</span></Link>
+              <Link to="/services/ict-equipment-supply-installation" className="service-card-link">Learn More <span>&rarr;</span></Link>
             </article>
           </div>
         </div>

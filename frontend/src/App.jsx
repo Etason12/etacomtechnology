@@ -95,7 +95,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/service" element={<Service />} />
+              <Route path="/services/:slug" element={<Service />} />
               <Route path="/erp-modules" element={<ERPModules />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/profile" element={<Profile />} />

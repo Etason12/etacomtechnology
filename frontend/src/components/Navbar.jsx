@@ -3,15 +3,15 @@ import { Link, NavLink } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
 const serviceLinks = [
-  { to: '/service?slug=custom-software-development', label: 'Custom Software Development' },
-  { to: '/service?slug=ai-machine-learning', label: 'AI & Machine Learning' },
-  { to: '/service?slug=data-engineering-analytics', label: 'Data Engineering & Analytics' },
-  { to: '/service?slug=cloud-solutions-devops', label: 'Cloud Solutions & DevOps' },
-  { to: '/service?slug=mobile-web-applications', label: 'Mobile & Web Applications' },
-  { to: '/service?slug=data-visualization-bi', label: 'Data Visualization & BI' },
-  { to: '/service?slug=data-center-solutions', label: 'Data Center Solutions' },
-  { to: '/service?slug=digital-transformation', label: 'Digital Transformation' },
-  { to: '/service?slug=ict-equipment-supply-installation', label: 'ICT Equipment Supply & Installation' },
+  { to: '/services/custom-software-development', label: 'Custom Software Development' },
+  { to: '/services/ai-machine-learning', label: 'AI & Machine Learning' },
+  { to: '/services/data-engineering-analytics', label: 'Data Engineering & Analytics' },
+  { to: '/services/cloud-solutions-devops', label: 'Cloud Solutions & DevOps' },
+  { to: '/services/mobile-web-applications', label: 'Mobile & Web Applications' },
+  { to: '/services/data-visualization-bi', label: 'Data Visualization & BI' },
+  { to: '/services/data-center-solutions', label: 'Data Center Solutions' },
+  { to: '/services/digital-transformation', label: 'Digital Transformation' },
+  { to: '/services/ict-equipment-supply-installation', label: 'ICT Equipment Supply & Installation' },
 ];
 
 const navLinks = [

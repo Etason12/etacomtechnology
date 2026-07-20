@@ -1,4 +1,4 @@
-const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://etacomtechnology.vercel.app';
+const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://etacomtechnology.com';
 
 export function createBreadcrumbJsonLd(items) {
   return {

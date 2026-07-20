@@ -40,7 +40,7 @@ export default function Services() {
                     <li key={i}>{tag}</li>
                   ))}
                 </ul>
-                <Link to={`/services?slug=${s.slug}`} className="service-card-link">Learn More <span>&rarr;</span></Link>
+                <Link to={`/services/${s.slug}`} className="service-card-link">Learn More <span>&rarr;</span></Link>
               </article>
             ))}
           </div>

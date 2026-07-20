@@ -13,8 +13,8 @@ export default function About() {
     <>
       <SEO
         title="About Us"
-        description="Learn about Etacom Technology - a premier software development and IT consulting company founded in 2023 in Addis Ababa, Ethiopia. Discover our mission, vision, and expertise."
-        keywords="about Etacom Technology, software company Addis Ababa, IT consulting Ethiopia, Ethiopian software company"
+        description="Learn about Etacom Technology - a premier ICT and software development company founded in 2023 in Mekelle, Tigray, Ethiopia. Discover our mission, vision, and expertise serving clients across Ethiopia."
+        keywords="about Etacom Technology, ICT company Mekelle, software development Tigray, IT consulting Addis Ababa, Ethiopian technology company, ICT solutions Ethiopia"
         canonical="/about"
         jsonLd={breadcrumbJsonLd}
       />

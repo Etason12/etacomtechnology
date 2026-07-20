@@ -12,7 +12,7 @@ export default function ERPModules() {
     <>
       <SEO
         title="ERP System Modules"
-        description="Explore Etacom Technology's comprehensive ERP modules for Ethiopian businesses: Accounting, HR, Inventory, Sales, CRM, Fleet Management, and more."
+        description="Explore Etacom Technology&apos;s comprehensive ERP modules for Ethiopian businesses: Accounting, HR, Inventory, Sales, CRM, Fleet Management, and more."
         keywords="ERP modules Ethiopia, ERP software Ethiopia, accounting ERP, HR payroll ERP, inventory management, CRM Ethiopia, Etacom Technology ERP"
         canonical="/erp-modules"
         jsonLd={breadcrumbJsonLd}

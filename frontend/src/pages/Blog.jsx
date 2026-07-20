@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import SEO from '../components/SEO';
 import PageHeader from '../components/PageHeader';
 import { createBreadcrumbJsonLd } from '../data/shared';
@@ -10,61 +8,96 @@ const breadcrumbJsonLd = createBreadcrumbJsonLd([
   { name: 'Blog', path: '/blog' },
 ]);
 
-const fallbackPosts = [
-  { title: 'The Future of ERP in 2026: Trends & Solutions', slug: 'future-of-erp-2026', category: 'ERP', excerpt: 'Explore how ERP systems are evolving with AI, cloud computing, and automation.', date: '2025-12-27', author: 'Etacom Technology' },
-  { title: 'Digital Transformation for Ethiopian Businesses', slug: 'digital-transformation', category: 'Technology', excerpt: 'Learn how Ethiopian businesses can embrace digital transformation.', date: '2025-11-28', author: 'Etacom Technology' },
-  { title: 'Top Software Development Trends in Ethiopia for 2026', slug: 'software-trends-2026', category: 'Software', excerpt: 'Discover the latest software development trends.', date: '2025-10-21', author: 'Etacom Technology' },
+const blogPosts = [
+  {
+    slug: 'hotels-ict-infrastructure',
+    title: 'Why Hotels in Ethiopia Need Modern ICT Infrastructure',
+    category: 'ICT Infrastructure',
+    excerpt: 'Guest expectations have changed. Modern hotels need reliable Wi-Fi, IPTV, and smart room controls to stay competitive. Here is what Ethiopian hotels should prioritize.',
+    date: '2026-06-01',
+    author: 'Etacom Technology',
+  },
+  {
+    slug: 'ngos-data-analytics',
+    title: 'How NGOs Can Use Data Analytics for Better Decision Making',
+    category: 'AI & Data',
+    excerpt: 'Development organizations collect vast amounts of data but often struggle to turn it into actionable insights. We explore practical approaches to data-driven decisions.',
+    date: '2026-05-15',
+    author: 'Etacom Technology',
+  },
+  {
+    slug: 'digital-transformation-sme',
+    title: 'Digital Transformation for Ethiopian SMEs: Where to Start',
+    category: 'Digital Transformation',
+    excerpt: 'Going digital does not have to be overwhelming. We break down the first steps any Ethiopian business can take to modernize their operations.',
+    date: '2026-04-01',
+    author: 'Etacom Technology',
+  },
+  {
+    slug: 'data-center-ethiopian-climate',
+    title: 'Data Center Design Considerations for the Ethiopian Climate',
+    category: 'Data Center',
+    excerpt: 'High temperatures and power fluctuations present unique challenges for data center operations in Ethiopia. Here is how to design for reliability.',
+    date: '2026-03-01',
+    author: 'Etacom Technology',
+  },
+  {
+    slug: 'custom-software-vs-offtheshelf',
+    title: 'Custom Software vs Off-the-Shelf: Which Is Right for Your Business?',
+    category: 'Software Development',
+    excerpt: 'We compare the pros and cons of building custom software versus using ready-made solutions, and help you decide what fits your needs and budget.',
+    date: '2026-02-01',
+    author: 'Etacom Technology',
+  },
+  {
+    slug: 'addis-ababa-office',
+    title: 'Etacom Technology Opens Addis Ababa Office',
+    category: 'Company News',
+    excerpt: 'We are expanding! Our new office in Addis Ababa allows us to better serve clients in the capital region and across southern Ethiopia.',
+    date: '2026-01-15',
+    author: 'Etacom Technology',
+  },
 ];
 
 export default function Blog() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL || '';
-    axios.get(`${API_URL}/api/blog`)
-      .then((res) => setPosts(res.data.data))
-      .catch(() => setPosts([]))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const displayPosts = posts.length > 0 ? posts : fallbackPosts;
-
   return (
     <>
       <SEO
         title="Blog"
-        description="Read insights on software development, ERP implementation, digital transformation, and technology trends in Ethiopia from Etacom Technology."
-        keywords="software development blog Ethiopia, ERP trends, technology insights Ethiopia, Etacom Technology blog, digital transformation Ethiopia"
+        description="Insights on software, AI, data, and technology trends in Ethiopia from Etacom Technology."
+        keywords="software development blog Ethiopia, AI trends Ethiopia, digital transformation Ethiopia, Etacom Technology blog"
         canonical="/blog"
         jsonLd={breadcrumbJsonLd}
       />
-      <PageHeader title="Our Blog" subtitle="Insights on software development, ERP implementation, and technology trends" />
+      <PageHeader title="Blog" subtitle="Insights on technology, innovation, and digital transformation in Ethiopia" />
 
-      <section className="section">
+      <section className="section animate-on-scroll">
         <div className="container">
-          {loading ? (
-            <p style={{ textAlign: 'center', color: 'var(--gray-500)' }}>Loading articles...</p>
-          ) : (
-            <div className="blog-page-grid">
-              {displayPosts.map((post) => (
-                <div className="card blog-card" key={post.slug}>
-                  <div className="blog-card-image">
-                    <i className="fas fa-newspaper" />
-                  </div>
-                  <div className="blog-card-body">
-                    <span className="category">{post.category || 'General'}</span>
-                    <h3><Link to={`/blog/${post.slug}`}>{post.title}</Link></h3>
-                    <p>{post.excerpt}</p>
-                    <div className="meta">
-                      <span><i className="far fa-calendar" /> <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time></span>
-                      <span><i className="far fa-user" /> {post.author}</span>
-                    </div>
-                  </div>
+          <div className="blog-grid animate-stagger">
+            {blogPosts.map((post) => (
+              <Link to={`/blog/${post.slug}`} className="blog-card" key={post.slug}>
+                <div className="blog-card-meta">
+                  <span className="blog-category">{post.category}</span>
+                  <span className="blog-date">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
-              ))}
-            </div>
-          )}
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+                <div className="blog-read-more">
+                  <span>Read article &rarr;</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-banner">
+        <div className="container cta-content">
+          <div>
+            <h2>Have a topic suggestion?</h2>
+            <p>We would love to hear what you would like us to write about.</p>
+          </div>
+          <Link to="/contact" className="btn btn-white">Let Us Know</Link>
         </div>
       </section>
     </>

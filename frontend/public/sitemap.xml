@@ -31,17 +31,52 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://etacomtechnology.com/blog/future-of-erp-2026</loc>
+    <loc>https://etacomtechnology.com/portfolio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://etacomtechnology.com/profile</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://etacomtechnology.com/blog/digital-transformation</loc>
+    <loc>https://etacomtechnology.com/terms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://etacomtechnology.com/privacy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://etacomtechnology.com/blog/hotels-ict-infrastructure</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://etacomtechnology.com/blog/software-trends-2026</loc>
+    <loc>https://etacomtechnology.com/blog/ngos-data-analytics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://etacomtechnology.com/blog/digital-transformation-sme</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://etacomtechnology.com/blog/data-center-ethiopian-climate</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://etacomtechnology.com/blog/custom-software-vs-offtheshelf</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://etacomtechnology.com/blog/addis-ababa-office</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

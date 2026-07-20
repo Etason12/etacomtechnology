@@ -14,7 +14,7 @@ export default function NotFound() {
       <section className="section" style={{ minHeight: '50vh', display: 'flex', alignItems: 'center' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <p style={{ color: 'var(--gray-500)', marginBottom: 24, fontSize: '1.1rem' }}>
-            The page you&apos;re looking for doesndoesndoesn&apos;tapos;tapos;t exist or has been moved.
+            The page you&apos;re looking for doesn&apos;t exist or has been moved.
           </p>
           <Link to="/" className="btn btn-primary">Go Home</Link>
         </div>

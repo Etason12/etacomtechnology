@@ -31,6 +31,8 @@ export default function Contact() {
     setSubmitting(true);
     const form = e.currentTarget;
     const payload = Object.fromEntries(new FormData(form).entries());
+    if (payload._hp) return;
+    delete payload._hp;
     try {
       const formspreeId = import.meta.env.VITE_FORMSPREE_ID || "your-form-id";
       if (formspreeId && formspreeId !== "your-form-id") {
@@ -147,6 +149,10 @@ export default function Contact() {
             <div className="form-group">
               <label htmlFor="message">Message</label>
               <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required></textarea>
+            </div>
+            <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
+              <label htmlFor="_hp">Leave this empty</label>
+              <input type="text" id="_hp" name="_hp" tabIndex={-1} autoComplete="off" />
             </div>
             <button
               type="submit"

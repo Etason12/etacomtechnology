@@ -42,56 +42,62 @@ function Loading() {
   );
 }
 
+function processAnimateElements(container) {
+  const reduced =
+    typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const targets = container.querySelectorAll('.animate-on-scroll, .animate-stagger');
+  targets.forEach((el) => {
+    if (el.classList.contains('visible')) return;
+    if (reduced) {
+      el.classList.add('visible');
+      return;
+    }
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      obs.observe(el);
+    }
+  });
+}
+
+let obs;
+
 function ScrollRevealOnRoute() {
   const { pathname } = useLocation();
   useEffect(() => {
-    if (
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ) {
-      document
-        .querySelectorAll('.animate-on-scroll, .animate-stagger')
-        .forEach((el) => el.classList.add('visible'));
-      return;
+    if (!obs) {
+      obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
     }
 
-    // Immediately reveal elements already in the viewport
-    const revealInView = () => {
-      const targets = document.querySelectorAll('.animate-on-scroll, .animate-stagger');
-      targets.forEach((el) => {
-        if (!el.classList.contains('visible')) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            el.classList.add('visible');
-          }
-        }
-      });
-      return targets;
-    };
+    const main = document.getElementById('main-content');
+    if (!main) return;
 
-    const targets = revealInView();
+    processAnimateElements(main);
 
-    // Set up IntersectionObserver for below-fold elements
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
+    const mo = new MutationObserver(() => processAnimateElements(main));
+    mo.observe(main, { childList: true, subtree: true });
 
-    targets.forEach((el) => {
-      if (!el.classList.contains('visible')) {
-        observer.observe(el);
+    return () => {
+      mo.disconnect();
+      if (obs) {
+        obs.disconnect();
+        obs = null;
       }
-    });
-
-    return () => observer.disconnect();
+    };
   }, [pathname]);
   return null;
 }

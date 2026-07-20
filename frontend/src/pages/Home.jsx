@@ -41,7 +41,6 @@ const organizationJsonLd = {
     },
   ],
   areaServed: ["Mekelle", "Tigray", "Addis Ababa", "Ethiopia"],
-  url: "https://www.google.com/maps?cid=CGAYZ9DSXEU4UQIFO",
   sameAs: [
     "https://facebook.com/etacomtechnology",
     "https://linkedin.com/company/etacomtechnology",

@@ -76,7 +76,6 @@ export default function Contact() {
             { '@type': 'PostalAddress', addressLocality: 'Addis Ababa', addressCountry: 'ET' },
           ],
           areaServed: ['Mekelle', 'Tigray', 'Addis Ababa', 'Ethiopia'],
-          url: 'https://www.google.com/maps?cid=CGAYZ9DSXEU4UQIFO',
         }]}
       />
       <PageHeader

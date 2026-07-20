@@ -32,7 +32,7 @@ export default function ERPModules() {
             {erpModulesDetailed.map((m) => (
               <div className="card service-page-card" key={m.title}>
                 <div className="icon"><i className={m.icon} /></div>
-                <h3>{m.title}</h3>
+                <h2>{m.title}</h2>
                 <p>{m.desc}</p>
               </div>
             ))}

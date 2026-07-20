@@ -253,7 +253,6 @@ export default function Service() {
         <SEO
           title="Service Not Found"
           description="The requested service could not be found. Please browse our services."
-          canonical="/services"
         />
         <PageHeader title="Service Not Found" subtitle="The requested service could not be found. Please browse our services below." />
         <section className="section">
@@ -270,6 +269,7 @@ export default function Service() {
     '@type': 'Service',
     name: service.title,
     description: service.description,
+    '@id': `https://etacomtechnology.com/services/${slug}`,
     provider: {
       '@type': 'Organization',
       name: 'Etacom Technology',
@@ -280,7 +280,7 @@ export default function Service() {
     availableChannel: {
       '@type': 'ServiceChannel',
       serviceUrl: `https://etacomtechnology.com/contact`,
-      availableLanguage: ['English', 'Amharic'],
+      availableLanguage: ['English'],
     },
   };
 
@@ -301,7 +301,7 @@ export default function Service() {
           <Link to="/services" className="service-back-link">&larr; All Services</Link>
           <div className="service-hero-icon" id="serviceHeroIcon" dangerouslySetInnerHTML={{ __html: service.icon }} />
           <span className="section-tag" id="serviceTag">{service.title}</span>
-          <h1 className="service-hero-title" id="serviceTitle">{service.title}</h1>
+          <h2 className="service-hero-title" id="serviceTitle">{service.title}</h2>
           <p className="service-hero-tagline" id="serviceTagline">{service.tagline}</p>
         </div>
       </section>

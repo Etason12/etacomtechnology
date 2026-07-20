@@ -4,6 +4,7 @@ export function createBreadcrumbJsonLd(items) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    '@id': `${SITE_URL}/breadcrumb`,
     itemListElement: items.map((item, i) => ({
       '@type': 'ListItem',
       position: i + 1,

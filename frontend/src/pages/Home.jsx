@@ -5,10 +5,11 @@ import AnimatedCounter from "../components/AnimatedCounter";
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "https://etacomtechnology.com/#organization",
   name: "Etacom Technology",
   url: "https://etacomtechnology.com",
   logo: "https://etacomtechnology.com/favicon.svg",
-  image: "https://etacomtechnology.com/og-image.png",
+  image: "https://etacomtechnology.com/og-image.svg",
   description: "Premier ICT and software development company serving Mekelle, Tigray, and all of Ethiopia with custom software, ERP, AI, data center, and ICT solutions.",
   foundingDate: "2023",
   address: [
@@ -52,14 +53,11 @@ const organizationJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "https://etacomtechnology.com/#website",
   name: "Etacom Technology",
   url: "https://etacomtechnology.com",
   description: "Software development, ERP systems, website design, and IT consulting services in Ethiopia.",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://etacomtechnology.com/search?q={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
+  // potentialAction removed — no /search route exists
 }
 
 export default function Home() {
@@ -110,21 +108,21 @@ export default function Home() {
             <div className="feature-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             </div>
-            <h3>Software Development</h3>
-            <p>Custom web, mobile, and enterprise software built with modern architectures and best-in-class technologies.</p>
-          </article>
-          <article className="feature-card">
-            <div className="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            </div>
-            <h3>AI & Machine Learning</h3>
-            <p>Intelligent solutions including predictive models, NLP, computer vision, and process automation powered by AI.</p>
-          </article>
-          <article className="feature-card">
-            <div className="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-            </div>
-            <h3>Data Engineering</h3>
+            <h2>Software Development</h2>
+             <p>Custom web, mobile, and enterprise software built with modern architectures and best-in-class technologies.</p>
+           </article>
+           <article className="feature-card">
+             <div className="feature-icon">
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+             </div>
+             <h2>AI & Machine Learning</h2>
+             <p>Intelligent solutions including predictive models, NLP, computer vision, and process automation powered by AI.</p>
+           </article>
+           <article className="feature-card">
+             <div className="feature-icon">
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+             </div>
+             <h2>Data Engineering</h2>
             <p>End-to-end data pipelines, warehousing, and analytics infrastructure to turn raw data into actionable insights.</p>
           </article>
         </div>

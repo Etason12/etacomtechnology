@@ -134,7 +134,7 @@ export default function About() {
             <h2>Want to work with us?</h2>
             <p>We&apos;re always looking for talented people and interesting projects.</p>
           </div>
-          <a href="/contact" className="btn btn-white">Get in Touch</a>
+          <Link to="/contact" className="btn btn-white">Get in Touch</Link>
         </div>
       </section>
     </>

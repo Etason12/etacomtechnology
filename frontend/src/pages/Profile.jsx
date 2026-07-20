@@ -7,24 +7,6 @@ const breadcrumbJsonLd = createBreadcrumbJsonLd([
   { name: 'Company Profile', path: '/profile' },
 ]);
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Etacom Technology',
-  url: 'https://etacomtechnology.com',
-  logo: 'https://etacomtechnology.com/favicon.svg',
-  description:
-    'Software, AI, data solutions, data center, and ICT equipment supplying & installation for hotels, enterprises and NGOs in Ethiopia.',
-  address: [
-    { '@type': 'PostalAddress', addressLocality: 'Mekelle', addressCountry: 'ET' },
-    { '@type': 'PostalAddress', addressLocality: 'Addis Ababa', addressCountry: 'ET' },
-  ],
-  contactPoint: [
-    { '@type': 'ContactPoint', telephone: '+25191408058', contactType: 'customer service', areaServed: 'Mekelle' },
-    { '@type': 'ContactPoint', telephone: '+251911554969', contactType: 'customer service', areaServed: 'Addis Ababa' },
-  ],
-};
-
 const servicesList = [
   { title: 'Custom Software Development', desc: 'Tailored web, mobile, and enterprise applications built with modern architectures, clean code, and scalable infrastructure. We build what your business actually needs.' },
   { title: 'AI & Machine Learning', desc: 'Intelligent solutions including predictive analytics, natural language processing, computer vision systems, and process automation powered by cutting-edge AI.' },
@@ -86,7 +68,7 @@ export default function Profile() {
         title="Company Profile"
         description="Etacom Technology company profile - software, AI, data, and ICT solutions provider in Ethiopia."
         canonical="/profile"
-        jsonLd={[breadcrumbJsonLd, jsonLd]}
+        jsonLd={breadcrumbJsonLd}
       />
 
       <div className="profile-toolbar">

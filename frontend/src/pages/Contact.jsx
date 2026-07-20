@@ -65,18 +65,7 @@ export default function Contact() {
         description="Get in touch with Etacom Technology for ICT solutions, software development, ERP systems, and IT consulting services in Mekelle, Tigray, and Addis Ababa, Ethiopia."
         keywords="ICT solutions Mekelle, contact Etacom Technology, IT services Tigray, software development Ethiopia, data center solutions, ICT equipment installation"
         canonical="/contact"
-        jsonLd={[breadcrumbJsonLd, {
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: 'Etacom Technology',
-          url: 'https://etacomtechnology.com',
-          telephone: ['+251-914-08058', '+251-911-554969'],
-          address: [
-            { '@type': 'PostalAddress', addressLocality: 'Mekelle', addressRegion: 'Tigray', addressCountry: 'ET' },
-            { '@type': 'PostalAddress', addressLocality: 'Addis Ababa', addressCountry: 'ET' },
-          ],
-          areaServed: ['Mekelle', 'Tigray', 'Addis Ababa', 'Ethiopia'],
-        }]}
+        jsonLd={[breadcrumbJsonLd]}
       />
       <PageHeader
         eyebrow="Get in touch"

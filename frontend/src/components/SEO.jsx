@@ -4,7 +4,7 @@ const SITE_NAME = 'Etacom Technology'
 const SITE_URL = 'https://etacomtechnology.com'
 const DEFAULT_DESC = 'Etacom Technology is a premier ICT and software development company based in Mekelle and Addis Ababa, Ethiopia. We deliver custom software, ERP, AI, data center, and ICT solutions across Ethiopia.'
 const DEFAULT_KEYWORDS = 'ICT solutions Mekelle, software development Tigray, ERP Ethiopia, IT consulting Addis Ababa, data center Ethiopia, ICT equipment supply, custom software Ethiopia, Etacom Technology'
-const OG_IMAGE = '/og-image.png'
+const OG_IMAGE = '/og-image.svg'
 
 export default function SEO({
   title,
@@ -36,6 +36,8 @@ export default function SEO({
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:image" content={`${SITE_URL}${ogImage}`} />
       <meta property="og:locale" content="en_US" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@etacomtechnology" />
@@ -44,6 +46,7 @@ export default function SEO({
       <meta name="twitter:image" content={`${SITE_URL}${ogImage}`} />
 
       {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {publishedTime && author && <meta property="article:author" content={author} />}
       {author && <meta name="twitter:creator" content={author} />}
 
       {jsonLd && (

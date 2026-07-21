@@ -2556,8 +2556,6 @@ input, select, textarea {
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   transition: all var(--transition-smooth);
-  text-decoration: none;
-  color: inherit;
   position: relative;
   overflow: hidden;
 }
@@ -2581,7 +2579,7 @@ input, select, textarea {
   transform: translateY(-6px);
 }
 
-.blog-card:focus-visible {
+.blog-card:focus-within {
   outline: 2px solid var(--color-border-focus);
   outline-offset: 2px;
 }
@@ -2616,7 +2614,7 @@ input, select, textarea {
   font-weight: 500;
 }
 
-.blog-card h3 {
+.blog-card h2 {
   font-family: var(--font-heading);
   font-size: var(--text-lg);
   font-weight: 700;
@@ -2626,7 +2624,7 @@ input, select, textarea {
   transition: color var(--transition-fast);
 }
 
-.blog-card:hover h3 {
+.blog-card:hover h2 {
   color: var(--color-primary);
 }
 
@@ -2645,10 +2643,12 @@ input, select, textarea {
   align-items: center;
   gap: var(--space-1);
   transition: gap var(--transition-base);
+  text-decoration: none;
 }
 
 .blog-read-more:hover {
   gap: var(--space-3);
+  color: var(--color-primary-light);
 }
 
 /* === Blog Post === */

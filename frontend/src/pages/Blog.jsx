@@ -75,17 +75,17 @@ export default function Blog() {
         <div className="container">
           <div className="blog-grid animate-stagger">
             {blogPosts.map((post) => (
-              <Link to={`/blog/${post.slug}`} className="blog-card" key={post.slug}>
+              <article className="blog-card" key={post.slug}>
                 <div className="blog-card-meta">
                   <span className="blog-category">{post.category}</span>
                   <span className="blog-date">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
                 <h2 className="blog-card-title">{post.title}</h2>
                 <p>{post.excerpt}</p>
-                <div className="blog-read-more">
-                  <span>Read article &rarr;</span>
-                </div>
-              </Link>
+                <Link to={`/blog/${post.slug}`} className="blog-read-more">
+                  Read More <span>&rarr;</span>
+                </Link>
+              </article>
             ))}
           </div>
         </div>

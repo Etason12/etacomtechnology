@@ -1723,6 +1723,25 @@ input, select, textarea {
   border-color: var(--color-border-error);
 }
 
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {
+  border-color: var(--color-border-error);
+}
+
+.form-group.has-error label {
+  color: var(--color-border-error);
+}
+
+.field-error {
+  font-size: var(--text-xs);
+  color: var(--color-border-error);
+  margin-top: var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
 /* === Footer === */
 .footer {
   background: var(--color-bg-inverse);

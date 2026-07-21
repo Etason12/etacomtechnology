@@ -21,33 +21,64 @@ const serviceOptions = [
   { value: "other", label: "Other" },
 ];
 
+function validate(values) {
+  const errors = {};
+  if (!values.name.trim()) errors.name = "Name is required";
+  if (!values.email.trim()) {
+    errors.email = "Email is required";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+    errors.email = "Enter a valid email address";
+  }
+  if (!values.service) errors.service = "Select a service";
+  if (!values.message.trim()) errors.message = "Message is required";
+  return errors;
+}
+
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState({ kind: "idle", message: "" });
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  const fields = ["name", "email", "phone", "service", "message"];
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const form = e.currentTarget.closest("form");
+    const data = Object.fromEntries(new FormData(form).entries());
+    setErrors(validate(data));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ kind: "idle", message: "" });
-    setSubmitting(true);
     const form = e.currentTarget;
-    const payload = Object.fromEntries(new FormData(form).entries());
-    if (payload._hp) return;
-    delete payload._hp;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const validationErrors = validate(data);
+    setErrors(validationErrors);
+    setTouched(Object.fromEntries(fields.map((f) => [f, true])));
+    if (Object.keys(validationErrors).length > 0) return;
+    if (data._hp) return;
+    delete data._hp;
+    setSubmitting(true);
     try {
       const formspreeId = import.meta.env.VITE_FORMSPREE_ID || "your-form-id";
       if (formspreeId && formspreeId !== "your-form-id") {
         const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(payload),
+          body: JSON.stringify(data),
         });
         if (!res.ok) throw new Error("submit-failed");
       }
       setStatus({
         kind: "success",
-        message: "Thank you! Your message has been sent. We&apos;ll get back to you within 24 hours.",
+        message: "Thank you! Your message has been sent. We'll get back to you within 24 hours.",
       });
       form.reset();
+      setErrors({});
+      setTouched({});
     } catch {
       setStatus({
         kind: "error",
@@ -57,6 +88,8 @@ export default function Contact() {
       setSubmitting(false);
     }
   };
+
+  const showError = (field) => touched[field] && errors[field];
 
   return (
     <>
@@ -124,32 +157,36 @@ export default function Contact() {
             className="contact-form"
             noValidate
           >
-            <div className="form-group">
+            <div className={`form-group${showError("name") ? " has-error" : ""}`}>
               <label htmlFor="name">Full Name</label>
-              <input type="text" id="name" name="name" placeholder="Your name" required autoComplete="name" />
+              <input type="text" id="name" name="name" placeholder="Your name" required onBlur={handleBlur} autoComplete="name" />
+              {showError("name") && <span className="field-error" role="alert">{errors.name}</span>}
             </div>
             <div className="form-row">
-              <div className="form-group">
+              <div className={`form-group${showError("email") ? " has-error" : ""}`}>
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="you@example.com" required autoComplete="email" />
+                <input type="email" id="email" name="email" placeholder="you@example.com" required onBlur={handleBlur} autoComplete="email" />
+                {showError("email") && <span className="field-error" role="alert">{errors.email}</span>}
               </div>
               <div className="form-group">
                 <label htmlFor="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" placeholder="+251..." autoComplete="tel" />
+                <input type="tel" id="phone" name="phone" placeholder="+251..." onBlur={handleBlur} autoComplete="tel" />
               </div>
             </div>
-            <div className="form-group">
+            <div className={`form-group${showError("service") ? " has-error" : ""}`}>
               <label htmlFor="service">What service do you need?</label>
-              <select id="service" name="service" required defaultValue="">
+              <select id="service" name="service" required defaultValue="" onBlur={handleBlur}>
                 <option value="" disabled>Select a service</option>
                 {serviceOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
                 ))}
               </select>
+              {showError("service") && <span className="field-error" role="alert">{errors.service}</span>}
             </div>
-            <div className="form-group">
+            <div className={`form-group${showError("message") ? " has-error" : ""}`}>
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required></textarea>
+              <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required onBlur={handleBlur}></textarea>
+              {showError("message") && <span className="field-error" role="alert">{errors.message}</span>}
             </div>
             <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
               <label htmlFor="_hp">Leave this empty</label>
@@ -160,7 +197,7 @@ export default function Contact() {
               className="btn btn-primary btn-full"
               disabled={submitting}
             >
-              {submitting ? "Sending…" : "Send Message"}
+              {submitting ? "Sending..." : "Send Message"}
             </button>
             <p
               className={`form-note${status.kind === "success" ? " success" : ""}${status.kind === "error" ? " error" : ""}`}

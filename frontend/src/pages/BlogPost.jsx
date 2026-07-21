@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import DOMPurify from 'dompurify';
 import SEO from '../components/SEO';
 import PageHeader from '../components/PageHeader';
@@ -184,27 +182,7 @@ const fallbackPosts = {
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL || '';
-    axios.get(`${API_URL}/api/blog/${slug}`)
-      .then((res) => setPost(res.data.data))
-      .catch(() => {
-        const fallback = fallbackPosts[slug];
-        if (fallback) setPost(fallback);
-      })
-      .finally(() => setLoading(false));
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <section className="section" style={{ paddingTop: 120 }}>
-        <div className="container"><p style={{ textAlign: 'center' }}>Loading...</p></div>
-      </section>
-    );
-  }
+  const post = fallbackPosts[slug];
 
   if (!post) {
     return (
